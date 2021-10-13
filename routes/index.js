@@ -11,7 +11,7 @@ function routerApi(app) {
   app.use('/api/v1', router); // Ruta padre
   router.use('/categories', categoriesRoutes);
   router.use('/products', productRoutes);
-  router.use('/user', userRoutes);
+  router.use('/users', userRoutes);
 }
 
 module.exports = routerApi;
