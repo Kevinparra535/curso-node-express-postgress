@@ -2,6 +2,9 @@
 /* eslint-disable no-unused-vars */
 // Detector de errores globales
 
+const { ValidationError } = require('sequelize');
+const boom = require('@hapi/boom');
+
 // Middleware para capturar errores globales
 function logErrors(err, req, res, next) {
   console.error(err);
@@ -17,7 +20,6 @@ function errorHandler(err, req, res, next) {
     error: err.message,
     stack: err.stack, // En donde ocurrio el error
   });
-  res.render('error', { error: err });
 }
 
 // Detector de errores para boom
@@ -31,4 +33,15 @@ function boomErrorHandler(err, req, res, next) {
   next(err);
 }
 
-module.exports = { logErrors, errorHandler, boomErrorHandler };
+function ormErrorHandler(err, req, res, next) {
+  if (err instanceof ValidationError) {
+    res.status(409).json({
+      statusCode: 409,
+      message: err.name,
+      errors: err.errors,
+    });
+  }
+  next(err);
+}
+
+module.exports = { logErrors, errorHandler, boomErrorHandler, ormErrorHandler };
