@@ -5,9 +5,10 @@ const {
   logErrors,
   errorHandler,
   boomErrorHandler,
+  ormErrorHandler
 } = require('./middlewares/error.handler');
 
-// Creamos una nueva aplicacion de express
+// Creamos una nueva aplicación de express
 const app = express();
 
 // Puerto
@@ -19,7 +20,7 @@ const routerApi = require('./routes/index');
 // Middleware
 app.use(express.json());
 
-const whitelist = ['http://localhost:3000', 'http://localhost:3001']; // Lista blanca para aceprtar dominios y origenes
+const whitelist = ['http://localhost:3000', 'http://localhost:3001']; // Lista blanca para aceptar dominios y orígenes
 const options = {
   origin: (origin, callback) => {
     if (whitelist.includes(origin) || !origin) {
@@ -39,10 +40,11 @@ app.get('/', (req, res) => {
 
 routerApi(app);
 
-// Middlewares siempre deben de ir despues de las rutas
+// Middleware siempre deben de ir después de las rutas
 app.use(logErrors);
 app.use(boomErrorHandler);
 app.use(errorHandler);
+app.use(ormErrorHandler);
 
 // Le decimos que escuche en el puerto 3000
 app.listen(port, () => {

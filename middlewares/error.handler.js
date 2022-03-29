@@ -33,6 +33,8 @@ function boomErrorHandler(err, req, res, next) {
   next(err);
 }
 
+
+// Validamos si hay un error de validacion,ejemplo explicito en los correos repetidos
 function ormErrorHandler(err, req, res, next) {
   if (err instanceof ValidationError) {
     res.status(409).json({
