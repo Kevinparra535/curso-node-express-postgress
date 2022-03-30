@@ -12,7 +12,7 @@ class UserService {
 
   async find() {
     // Consulta a la db de postgres
-    const response = await models.User.findAll(); // Traigame todo lo que esta en la tabla usuarios
+    const response = await models.User.findAll(); // Tráigame todo lo que esta en la tabla usuarios
     return response;
   }
 
@@ -25,7 +25,7 @@ class UserService {
     return user;
   }
 
-  // Actializar un usuario
+  // Actualizar un usuario
   async update(id, changes) {
     const user = await this.findOne(id);
     const response = await user.update(changes);
