@@ -30,6 +30,14 @@ const UserSchema = {
     field: 'created_at', // Snake_case para sql
     defaultValue: Sequelize.NOW,
   },
+
+  updateAt: {
+    // Camel Case para JS
+    allowNull: false,
+    type: DataTypes.DATE,
+    field: 'update_at', // Snake_case para sql
+    defaultValue: Sequelize.NOW,
+  },
 };
 
 /*

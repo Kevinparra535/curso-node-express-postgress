@@ -42,9 +42,9 @@ routerApi(app);
 
 // Middleware siempre deben de ir después de las rutas
 app.use(logErrors);
+app.use(ormErrorHandler); // Captura los errores del orm
 app.use(boomErrorHandler);
 app.use(errorHandler);
-app.use(ormErrorHandler);
 
 // Le decimos que escuche en el puerto 3000
 app.listen(port, () => {

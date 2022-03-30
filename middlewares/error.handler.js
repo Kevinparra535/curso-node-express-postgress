@@ -10,15 +10,16 @@ function logErrors(err, req, res, next) {
   console.error(err);
 
   // Si se envia el parametro error le decimos que es un Middleware tipo error
-  next(err); // Envia el error al siguiente middleware
+  next(err); // Enviá el error al siguiente middleware
 }
 
 // Middleware para formatear los errores
-// Siempre debe tener los 4 parametros
+// Siempre debe tener los 4 Parametros
 function errorHandler(err, req, res, next) {
   res.status(500).json({
+    statusCode: 500,
     error: err.message,
-    stack: err.stack, // En donde ocurrio el error
+    stack: err.stack, // En donde ocurrió el error
   });
 }
 
@@ -33,8 +34,7 @@ function boomErrorHandler(err, req, res, next) {
   next(err);
 }
 
-
-// Validamos si hay un error de validacion,ejemplo explicito en los correos repetidos
+// Validamos si hay un error de validación, ejemplo explicito en los correos repetidos
 function ormErrorHandler(err, req, res, next) {
   if (err instanceof ValidationError) {
     res.status(409).json({
