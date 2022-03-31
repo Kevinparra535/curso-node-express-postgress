@@ -6,10 +6,14 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js",
     "start": "node index.js",
-    "lint": "eslint"
+    "lint": "eslint",
+    "migrations:generate": "sequelize-cli migration:generate --name",
+    "migrations:run": "sequelize-cli db:migrate",
+    "migrations:revert": "sequelize-cli db:migrate:undo",
+    "migrations:delete": "sequelize-cli db:migrate:undo:all"
   },
   "keywords": [],
-  "author": "Kevin Parra Lopez <kevinparra535@gmail.com>",
+  "author": "Kevin Parra López <kevinparra535@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "eslint": "^7.32.0",
