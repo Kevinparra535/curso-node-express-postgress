@@ -23,6 +23,12 @@ const UserSchema = {
     type: DataTypes.STRING,
   },
 
+  role: {
+    allowNull: false,
+    type: DataTypes.STRING,
+    defaultValue: 'costumer',
+  },
+
   createdAt: {
     // Camel Case para JS
     allowNull: false,
@@ -38,6 +44,7 @@ const UserSchema = {
     field: 'update_at', // Snake_case para sql
     defaultValue: Sequelize.NOW,
   },
+
 };
 
 /*
