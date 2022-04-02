@@ -6,7 +6,8 @@ class CustomerService {
   constructor() {}
 
   async create(data) {
-    return data;
+    const newCostumer = await models.Customer.create(data);
+    return newCostumer;
   }
 
   async find() {

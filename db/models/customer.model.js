@@ -1,5 +1,7 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
+const { USER_TABLE } = require('./user.model');
+
 // Vamos a definir el modelo de la tabla
 const CUSTOMER_TABLE = 'customers'; // Nombre de la tabla
 
@@ -34,11 +36,30 @@ const CustomerSchema = {
     field: 'created_at',
     defaultValue: Sequelize.NOW,
   },
+
+  // Esquema para la asociaion/relacion
+  userId: {
+    field: 'user_id',
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    references: {
+      // A que tabla esta relacionada
+      model: USER_TABLE,
+      key: 'id',
+    },
+    onUpdate: 'CASCADE', // Que quieres que hagas cuando cambie ese ID
+    onDelete: 'SET NULL',
+  },
 };
 
 class Customer extends Model {
-  static associate() {
-    // associate
+  static associate(models) {
+    // Relacion
+
+    // Le decimos hacia donde va esa relacion
+    this.belongsTo(models.User, {
+      as: 'user', // Alias
+    });
   }
 
   static config(sequelize) {

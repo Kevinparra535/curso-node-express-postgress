@@ -8,6 +8,9 @@ function setupModels(sequelize) {
   // Una vez vaya a la conexion voy al modelo y haga un init, pasándole el esquema y la config
   User.init(UserSchema, User.config(sequelize));
   Customer.init(CustomerSchema, Customer.config(sequelize));
+
+  // Aca ejecutamos nuestras asociaciones/relaciones
+  Customer.associate(sequelize.models);
 }
 
 module.exports = setupModels;
