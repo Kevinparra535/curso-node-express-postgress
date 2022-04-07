@@ -42,6 +42,7 @@ const CustomerSchema = {
     field: 'user_id',
     allowNull: false,
     type: DataTypes.INTEGER,
+    unique: true,
     references: {
       // A que tabla esta relacionada
       model: USER_TABLE,

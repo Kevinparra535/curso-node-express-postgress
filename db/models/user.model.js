@@ -44,7 +44,6 @@ const UserSchema = {
     field: 'update_at', // Snake_case para sql
     defaultValue: Sequelize.NOW,
   },
-
 };
 
 /*
@@ -52,8 +51,14 @@ const UserSchema = {
  * Static: no necesita instanciar la clase para poder usarla
  */
 class User extends Model {
-  static associate() {
-    // associate
+  static associate(models) {
+    // Relacion
+
+    // Le decimos hacia donde va esa relacion
+    this.hasOne(models.Customer, {
+      as: 'customers', // Alias
+      foreignKey: 'userId', // Nombre de la columna en el lado del customer
+    });
   }
 
   static config(sequelize) {

@@ -12,7 +12,11 @@ class UserService {
 
   async find() {
     // Consulta a la db de postgres
-    const response = await models.User.findAll(); // Tráigame todo lo que esta en la tabla usuarios
+    const response = await models.User.findAll({
+      include: [
+        'customers', // Aca van todas las asociaciones
+      ],
+    }); // Tráigame todo lo que esta en la tabla usuarios
     return response;
   }
 
